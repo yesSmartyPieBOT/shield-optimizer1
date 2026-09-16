@@ -19,7 +19,6 @@ public final class NovexConfig {
     public boolean armorHud = true;
     public boolean inventoryHud = true;
     public boolean scoreboardHud = true;
-    public boolean fullBrightness = false;
     public boolean effectHud = true;
 
     public float fireOpacity = 0.35f;
@@ -29,7 +28,6 @@ public final class NovexConfig {
     public float inventoryScale = 1.0f;
     public float scoreboardScale = 1.0f;
     public float effectScale = 1.0f;
-    public float brightness = 1.0f;
 
     public static NovexConfig load() {
         try {

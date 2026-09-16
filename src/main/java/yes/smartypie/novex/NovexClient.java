@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.minecraft.client.KeyMapping;
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
 import org.lwjgl.glfw.GLFW;
 import yes.smartypie.novex.config.NovexConfig;
@@ -43,6 +44,7 @@ public final class NovexClient implements ClientModInitializer {
             }
             while (toggleBrightness.consumeClick()) {
                 CONFIG.fullBrightness = !CONFIG.fullBrightness;
+                applyBrightness(client);
                 CONFIG.save();
             }
             while (toggleScoreboard.consumeClick()) {
@@ -50,6 +52,13 @@ public final class NovexClient implements ClientModInitializer {
                 CONFIG.save();
             }
         });
+
+        applyBrightness(Minecraft.getInstance());
+    }
+
+    public static void applyBrightness(Minecraft client) {
+        if (client == null) return;
+        client.options.getGamma().setValue(CONFIG.fullBrightness ? 16.0 : CONFIG.brightness);
     }
 
     public static Identifier id(String path) {

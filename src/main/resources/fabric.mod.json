@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "novex",
+  "version": "${version}",
+  "name": "Novex Client",
+  "description": "A modular Fabric client with customizable PvP HUD, visual and performance features.",
+  "authors": ["yesSmartyPieBOT"],
+  "contact": {
+    "sources": "https://github.com/yesSmartyPieBOT/shield-optimizer"
+  },
+  "license": "MIT",
+  "icon": "assets/novex/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "yes.smartypie.novex.NovexClient"
+    ]
+  },
+  "mixins": [
+    "novex.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.18.1",
+    "minecraft": "~1.21.11",
+    "fabric-api": "*"
+  }
+}

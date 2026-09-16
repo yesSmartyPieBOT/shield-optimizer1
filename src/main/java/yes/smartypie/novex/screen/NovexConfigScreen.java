@@ -46,7 +46,10 @@ public final class NovexConfigScreen extends Screen {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-        renderBackground(graphics, mouseX, mouseY, delta);
+        // Do not call renderBackground() here. Minecraft 1.21.11 can blur only once per frame,
+        // and the normal Screen rendering path may already perform the blur pass.
+        graphics.fill(0, 0, this.width, this.height, 0xFF101018);
+        graphics.fill(this.width / 2 - 125, 10, this.width / 2 + 125, 35, 0xFF20202A);
         graphics.drawCenteredString(this.font, this.title, this.width / 2, 20, 0xFFFFFF);
         super.render(graphics, mouseX, mouseY, delta);
     }

@@ -18,7 +18,6 @@ public final class NovexClient implements ClientModInitializer {
     public static final NovexConfig CONFIG = NovexConfig.load();
 
     private static KeyMapping openConfig;
-    private static KeyMapping toggleBrightness;
     private static KeyMapping toggleScoreboard;
 
     @Override
@@ -29,9 +28,6 @@ public final class NovexClient implements ClientModInitializer {
         openConfig = KeyBindingHelper.registerKeyBinding(new KeyMapping(
                 "key.novex.open_config", InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_RIGHT_SHIFT, category));
-        toggleBrightness = KeyBindingHelper.registerKeyBinding(new KeyMapping(
-                "key.novex.full_brightness", InputConstants.Type.KEYSYM,
-                GLFW.GLFW_KEY_B, category));
         toggleScoreboard = KeyBindingHelper.registerKeyBinding(new KeyMapping(
                 "key.novex.scoreboard", InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_O, category));
@@ -42,23 +38,11 @@ public final class NovexClient implements ClientModInitializer {
             while (openConfig.consumeClick()) {
                 client.setScreen(new NovexConfigScreen(client.screen));
             }
-            while (toggleBrightness.consumeClick()) {
-                CONFIG.fullBrightness = !CONFIG.fullBrightness;
-                applyBrightness(client);
-                CONFIG.save();
-            }
             while (toggleScoreboard.consumeClick()) {
                 CONFIG.scoreboardHud = !CONFIG.scoreboardHud;
                 CONFIG.save();
             }
         });
-
-        applyBrightness(Minecraft.getInstance());
-    }
-
-    public static void applyBrightness(Minecraft client) {
-        if (client == null) return;
-        client.options.getGamma().setValue(CONFIG.fullBrightness ? 16.0 : CONFIG.brightness);
     }
 
     public static Identifier id(String path) {

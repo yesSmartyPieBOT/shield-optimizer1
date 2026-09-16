@@ -51,14 +51,9 @@ public final class NovexConfigScreen extends Screen {
                 () -> NovexClient.CONFIG.scoreboardHud = !NovexClient.CONFIG.scoreboardHud,
                 startX + gapX, startY + gapY * 3, buttonWidth, buttonHeight));
 
-        addRenderableWidget(toggle("Full Brightness", () -> NovexClient.CONFIG.fullBrightness,
-                () -> {
-                    NovexClient.CONFIG.fullBrightness = !NovexClient.CONFIG.fullBrightness;
-                    NovexClient.applyBrightness(this.minecraft);
-                }, startX, startY + gapY * 4, buttonWidth, buttonHeight));
         addRenderableWidget(toggle("Effect HUD", () -> NovexClient.CONFIG.effectHud,
                 () -> NovexClient.CONFIG.effectHud = !NovexClient.CONFIG.effectHud,
-                startX + gapX, startY + gapY * 4, buttonWidth, buttonHeight));
+                startX, startY + gapY * 4, buttonWidth, buttonHeight));
 
         addRenderableWidget(Button.builder(Component.literal("Done"), b -> {
             NovexClient.CONFIG.save();
@@ -83,7 +78,6 @@ public final class NovexConfigScreen extends Screen {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-        // Avoid the 1.21.11 double-blur crash caused by renderBackground().
         graphics.fill(0, 0, this.width, this.height, 0xFF101018);
         graphics.fill(this.width / 2 - 150, 10, this.width / 2 + 150, 37, 0xFF20202A);
         graphics.drawCenteredString(this.font, this.title, this.width / 2, 20, 0xFFFFFF);
